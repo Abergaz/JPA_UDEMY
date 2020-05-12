@@ -18,6 +18,9 @@
         <class>ee.jpa.Student</class>
         <class>ee.jpa.Book</class>
 
+        <!-- exclude-unlisted-classes false - включить все классы с @Entity, true - выключить все  (можно не писать классы в <class>-->
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+
         <!-- properties указываются все параметры подключения к БД и доп. настройки -->
         <properties>
             <!-- javax.persistence.schema-generation.database.action указывает как быть с таблицами при старте приложения, можно не указывать если такблицы уже есть в СУБД -->

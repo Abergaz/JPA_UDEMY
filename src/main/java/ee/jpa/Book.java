@@ -5,12 +5,21 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Books")
 public class Book {
-    @Id //Указатель первичного ключа Primary key, может быть над несколькими полями(составной первичный ключ)
+    @Id
     @GeneratedValue
     int id;
+    /** FetchType.EAGER по умолчанию, загрузка сразу при считывании, FetchType.LAZY - при обращении*/
+    @Basic(fetch = FetchType.EAGER)
     String name;
 
-    // !!! для классов @Entity всегда должен быть конструктор по уполчанию
+    @Basic(fetch = FetchType.LAZY) /** грузить картинку только при обращении*/
+    @Lob /** BLOB - увеличенного размера*/
+    byte[] img;
+
+    @Basic(optional = false )/** По умолчанию false - значит атрибут Not Null, если true - то NULL */
+    String desc;
+
+
     public Book() {
     }
 

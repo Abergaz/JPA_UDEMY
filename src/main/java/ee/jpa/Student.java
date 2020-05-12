@@ -5,6 +5,7 @@ import java.util.Date;
 
 @Entity //Помечаем класс как запись такблицы и все его свойства - это столбцы
 @Table(name = "Students")//Указываем как будет называться таблица для @Entity данного класс
+
 //@SecondaryTable("Adresses") Позволяет часть данных класса выносить в другую таблицу, используется совместно с @Column(table="")
 @SecondaryTables({@SecondaryTable(name="Adresses"), @SecondaryTable(name="Countrys")})//Вынос даных в несколько таблиц
 public class Student {

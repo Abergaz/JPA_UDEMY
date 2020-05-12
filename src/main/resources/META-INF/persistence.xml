@@ -1,21 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Если это java SE то persistence.xml должен лежать в src\main\resources\META-INF\ -->
+<!-- Если это java EE то persistence.xml должен лежать в WEB\WEB-INF\ -->
 
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
              http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
              version="2.2">
-
+    <!-- persistence-unit настройки подключения к БД используются при создании EntityManagerFactory  -->
     <persistence-unit name="bookUnit" transaction-type="RESOURCE_LOCAL">
 
+        <!-- provider - указываем JPA провайдера/реализацию  например Hibernate или Eclipselink-->
+        <!-- <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider> -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+         <!--class все наши Entity долдны быть тут указаны -->
         <class>ee.jpa.Student</class>
+
+        <!-- properties указываются все параметры подключения к БД и доп. настройки -->
         <properties>
+            <!-- javax.persistence.schema-generation.database.action указывает как быть с таблицами при старте приложения, можно не указывать если такблицы уже есть в СУБД -->
+            <!-- значение none - ничего не делать -->
+            <!-- create всегда пытаться создать таблицы при запуске приложения, даже если они ессть -->
+            <!-- drop-and-create всегда пытаться сбросить и создать таблицы при запуске приложения, даже если они ессть -->
+            <!-- drop всегда пытаться удалить таблицы при запуске приложения, даже если их нeт -->
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+
+            <!-- указывам driver, url, user, pass так же как при подключении JDBC-->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/test" />
             <property name="javax.persistence.jdbc.user" value="root" />
             <property name="javax.persistence.jdbc.password" value="1111" />
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
+
+            <!-- для работы hinernate важен диалект конкретной СУБД можно не указывать -->
+           <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
         </properties>
     </persistence-unit>
 </persistence>

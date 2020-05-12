@@ -1,33 +1,71 @@
 package ee.jpa;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.io.Serializable;
+import java.util.Objects;
 
 @Entity //Помечаем класс как запись такблицы и все его свойства - это столбцы
-@Table(name = "Students")//Указываем как будет называться таблица для @Entity данного класс
-
-@SecondaryTables({@SecondaryTable(name="Adresses"), @SecondaryTable(name="Countrys")})//Вынос даных в несколько таблиц
+//@IdClass(StudId.class) можно использовать вместо @EmbeddedId, тогда класс не надо помечать @Embeddable, а поля надо указать в текущем классе и пометить их @Id
 public class Student {
-    //уникальный идентификатор @Id казатель первичного ключа Primary key, может быть над несколькими полями(составной первичный ключ)
-    @Id
-    /**  Можно не использовать @GeneratedValue, если в таблице настроить auto_increment для данного столбца*/
-    int id;
-    String name;
+    @EmbeddedId //Поля указанного класс будуь сотавным первичым ключем
+    StudId studId;
     int age;
-    Date birth;
-    @Column(table = "Adresses")//Доя выноса данных в другую таблицу
-    String city;
-    @Column(table = "Adresses")
-    String street;
-    @Column(table = "Countrys")
-    String country;
+
 
     // !!! для классов @Entity всегда должен быть конструктор по уполчанию
     public Student() {
     }
 
-    public Student(String name, int age) {
-        this.name = name;
+    public Student(String name, String serName, int age) {
+        this.studId = new StudId(name,serName);
         this.age = age;
+    }
+}
+/** Класс должен обязательно быть помечен как @Embeddable
+ * Должен имлементировать Serializable и => иметь пустой конструктор
+ * переобределять equals и hashCode
+ */
+@Embeddable
+class StudId implements Serializable {
+    String name;
+    String serName;
+
+    public StudId() {
+    }
+    public StudId( String name, String serName) {
+        this.name =name;
+        this.serName = serName;
+
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSerName() {
+        return serName;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSerName(String serName) {
+        this.serName = serName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StudId studId = (StudId) o;
+        return Objects.equals(name, studId.name) &&
+                Objects.equals(serName, studId.serName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, serName);
     }
 }

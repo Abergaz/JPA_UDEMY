@@ -16,6 +16,7 @@
 
          <!--class все наши Entity долдны быть тут указаны -->
         <class>ee.jpa.Student</class>
+        <class>ee.jpa.Book</class>
 
         <!-- properties указываются все параметры подключения к БД и доп. настройки -->
         <properties>

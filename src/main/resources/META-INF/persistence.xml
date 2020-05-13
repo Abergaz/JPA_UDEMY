@@ -15,15 +15,15 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <!-- маппинг класса из XML   -->
-        <mapping-file>/META-INF/StudentMap.xml</mapping-file>
+        <!-- <mapping-file>/META-INF/StudentMap.xml</mapping-file> -->
 
-        <!--class все наши Entity долдны быть тут указаны -->
+       <!--class все наши Entity долдны быть тут указаны -->
         <!--<class>ee.jpa.Student</class> -->
         <!--<class>ee.jpa.Book</class> -->
 
 
         <!-- exclude-unlisted-classes false - включить все классы с @Entity, true - выключить все  (можно не писать классы в <class>-->
-        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
 
 
 

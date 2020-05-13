@@ -13,7 +13,7 @@ public class MainExample {
         EntityTransaction transaction = entityManager.getTransaction();
 
         transaction.begin();
-        entityManager.persist(new Student("Max","Blac",22));
+        entityManager.persist(new Student18("Max"));
         transaction.commit();
 
         entityManager.close();

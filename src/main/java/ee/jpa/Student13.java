@@ -8,6 +8,7 @@ import java.util.Date;
 public class Student13 {
     @Id
     @GeneratedValue
+    int id;
     String name;
     int age;
     /** TemporalType.DATE - сохраниться толька дата

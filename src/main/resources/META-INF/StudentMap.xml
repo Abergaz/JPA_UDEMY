@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
+             version="2.2">
+
+        <entity class="ee.jpa.Student18" access="FIELD">
+            <table name="StudentTable"/>
+            <attributes>
+                <id name="id">
+                    <column name="id" nullable="false"/>
+                </id>
+                <basic name="name">
+                    <column name="name" length="50"/>
+                </basic>
+            </attributes>
+        </entity>
+</entity-mappings>

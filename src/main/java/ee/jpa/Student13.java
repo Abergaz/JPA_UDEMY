@@ -1,6 +1,7 @@
 package ee.jpa;
 
 import javax.persistence.*;
+import java.util.Calendar;
 import java.util.Date;
 
 @Entity
@@ -8,7 +9,13 @@ public class Student13 {
     @Id
     @GeneratedValue
     String name;
-    @Transient /** Поля помечанные @Transient или transient в БД не сохраняются */
     int age;
-    Date birth;
+    /** TemporalType.DATE - сохраниться толька дата
+     *  TemporalType.TIME - сохраниться толька время
+     *  TemporalType.TIMESTAMP - и дата и время
+     */
+    @Temporal(TemporalType.TIME)
+    Date time;
+    @Temporal(TemporalType.DATE) /** Работает и с календарем*/
+    Calendar date;
 }
